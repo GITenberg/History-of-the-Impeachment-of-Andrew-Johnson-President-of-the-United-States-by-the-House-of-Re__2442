@@ -1,0 +1,29 @@
+_repo: History-of-the-Impeachment-of-Andrew-Johnson-President-of-the-United-States-by-the-House-of-Re__2442
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Ross, Edmund G. (Edmund Gibson)
+    alias: Ross, Edmund Gibson
+    birthdate: 1826
+    deathdate: 1907
+    gutenberg_agent_id: '911'
+    url: http://www.gutenberg.org/2009/agents/911
+    wikipedia: http://en.wikipedia.org/wiki/Edmund_G._Ross
+description: ''
+gutenberg_bookshelf: Crime Nonfiction
+gutenberg_issued: '2000-12-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '2442'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'E660'
+- !lcsh 'Johnson, Andrew, 1808-1875 -- Impeachment'
+- GITenberg
+title: History of the Impeachment of Andrew Johnson, President of the United States,
+  by the House of Representatives, and his trial by the Senate for high crimes and
+  misdemeanors in office, 1868
+url: http://www.gutenberg.org/ebooks/2442
