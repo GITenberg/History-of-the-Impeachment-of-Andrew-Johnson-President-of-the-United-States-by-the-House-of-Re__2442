@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: Sh36aE/OhrcwOE/tGrwAj0Rrm8YdFDuALuxrObm/OteNQroFmenhNJhnWkKcZc87CxQXMIaZ0erVYL/8bUrz6HlOIShGn0L5Wfe+YFiW4pJ2W72uxSv4DgUweBLBL34fbT5SFfIS/F0I3riqVIaMceyfjQaSKAonY2QsJE41esoBColF/ZmhnUWOd/2aZjAnJO3hpEtyXjcfz1xwrVoXnE6N91cfZ5JkFXhgraUAdYR1BdAk74eo8aQU/2+DEXT1CSeScXWIXUqmPL5OdcY4EGDmKr7yZ1QAx5V6ybATxtWNWJUuRsC6h3cTtf06UWkGP+zNqdp20F9CuwfNWhkS+RmxsY83ild7x64pPi6LdbOA1hCQ0jDMUiMTrCa+AN3nVobSoJK95IwM7cz568dZiv1i4JC6jK28Jf9yiR97E8z0u/7Ug+3WmGqW37zFCc7EhN7vsu4vpALOFo4oGXzClQAxCo7y9sVDVk7KdMDG677ic5SZNQacZJ3pZjGF0IWZsNN4yxk4YXA5tTfOKIFEmTxKAYP8qdhw7q9fxgRy2OSL8CJ521rNRCX7g4sp/mGOhT3snRAOTrmW6r9Dvftc9XdtQQgTiumNMZYwz9ilxbZ/2e5Eyc7WZ3eFTC2+OeFGj2tvRrb/FGr99VF48JJeQWT3GNargIK+N2JtLK57E6A=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/History-of-the-Impeachment-of-Andrew-Johnson-President-of-the-United-States-by-the-House-of-Re__2442
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
